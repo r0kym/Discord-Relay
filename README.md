@@ -8,8 +8,11 @@ Basic bot using [discord.py-self](https://github.com/dolfies/discord.py-self) to
 virtualenv -p python 3.8 venv
 . ./venv/bin/activate
 pip install -r requirements.txt
+cp utils.py.dev utils.py
 ```
-`deactivate` to leave the virtual environment
+Then fill up `utils.py`
+
+Type `deactivate` to leave the virtual environment
 
 # TODO
 
