@@ -1,5 +1,12 @@
 import discord
-from utils import *
+import os
+import json
+
+
+DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
+SPY_CHANNELS = json.loads(os.environ.get("SPY_CHANNELS"))
+WEBHOOK_ID = os.environ.get("WEBHOOK_ID")
+WEBHOOK_TOKEN = os.environ.get("WEBHOOK_TOKEN")
 
 
 class MyClient(discord.Client):

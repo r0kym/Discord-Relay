@@ -3,21 +3,30 @@ Discord Relay
 
 Basic bot using [discord.py-self](https://github.com/dolfies/discord.py-self) to relay messages in a channel to a dedicated webhook.
 
-# Setup
-```sh
-virtualenv -p python 3.8 venv
-. ./venv/bin/activate
-pip install -r requirements.txt
-cp utils.py.dev utils.py
-```
-Then fill up `utils.py`
 
-Type `deactivate` to leave the virtual environment
+# Setup
+Build the docker image
+```shell
+docker build -t relay .
+```
+
+
+# Startup
+```sh
+docker run --rm -d \
+  --env "DISCORD_TOKEN=DISCORD_TOKEN" \
+  --env "SPY_CHANNELS=[CHANNELS_IDS]" \
+  --env "WEBHOOK_ID=WEBHOOK_ID" \
+  --env "WEBHOOK_TOKEN=WEBHOOK_TOKEN" \
+  --name NAME 
+  relay
+```
+Needs to be started once per tracked discord users but will notify for each channel in `SPY_CHANNELS`.
+Put a different `NAME` for each to differentiate them.
+
 
 # TODO
 
+ - [x] Docker integration
  - [ ] Cleaner code
- - [ ] Relay channels to different webhooks
-   - [ ] Easier webhook handling
-   - [ ] Link between webhooks and channels
- - [ ] Multiple spies relay? (Not sure if possible)
+ - [ ] Multiple clients?
