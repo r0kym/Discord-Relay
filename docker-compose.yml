@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  relay:
+    build: .
+    environment:
+      - DISCORD_TOKEN=
+      - SPY_CHANNELS=
+      - WEBHOOK_ID=
+      - WEBHOOK_TOKEN=
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
