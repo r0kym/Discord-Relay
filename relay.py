@@ -20,11 +20,11 @@ class MyClient(discord.Client):
 
         if message.channel.id in SPY_CHANNELS and message.content:
             embed = discord.Embed(title=message.channel.guild.name)
-            embed.set_author(name=message.author.display_name,
-                             icon_url=f'https://cdn.discordapp.com/avatars/{message.author.id}/{message.author.avatar}.webp')
             embed.add_field(name=message.channel.name, value=self.reformat_message(message))
 
-            webhook.send(embeds=[embed] + message.embeds[:9])
+            webhook.send(username=message.author.display_name,
+                         avatar_url=f'https://cdn.discordapp.com/avatars/{message.author.id}/{message.author.avatar}.webp',
+                         embeds=[embed] + message.embeds[:9])
 
     def reformat_message(self, message: discord.Message) -> str:
         """
@@ -44,7 +44,7 @@ class MyClient(discord.Client):
                 pass
 
             if user_id:
-                username = self.member_or_user_name_from_id(user_id, message.guild)
+                username = self.member_or_user_name_from_id(user_id, message.gguild)
                 message_content = message_content[:mention.span()[1]+offset] + f"({username})" + message_content[mention.span()[1]+offset:]
                 offset += len(username) + 2
 
