@@ -44,7 +44,7 @@ class MyClient(discord.Client):
                 pass
 
             if user_id:
-                username = self.member_or_user_name_from_id(user_id, message.gguild)
+                username = self.member_or_user_name_from_id(user_id, message.guild)
                 message_content = message_content[:mention.span()[1]+offset] + f"({username})" + message_content[mention.span()[1]+offset:]
                 offset += len(username) + 2
 
