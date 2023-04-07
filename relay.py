@@ -8,6 +8,7 @@ SPY_CHANNELS = json.loads(os.environ.get("SPY_CHANNELS"))
 WEBHOOK_ID = int(os.environ.get("WEBHOOK_ID"))
 WEBHOOK_TOKEN = os.environ.get("WEBHOOK_TOKEN")
 
+webhook = discord.Webhook.partial(WEBHOOK_ID, WEBHOOK_TOKEN, adapter=discord.RequestsWebhookAdapter())
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -15,9 +16,12 @@ class MyClient(discord.Client):
         for channel_id in SPY_CHANNELS:
             print(f" - {self.get_channel(channel_id)}")
 
-    async def on_message(self, message: discord.Message):
-        webhook = discord.Webhook.partial(WEBHOOK_ID, WEBHOOK_TOKEN, adapter=discord.RequestsWebhookAdapter())
+        embed = discord.Embed(title="Discord relay started")
+        channels = '\n'.join([self.get_channel(channel_id).name for channel_id in SPY_CHANNELS])
+        embed.add_field(name="Channels observed:", value=channels)
+        webhook.send(username=self.user.name, embed=embed)
 
+    async def on_message(self, message: discord.Message):
         if message.channel.id in SPY_CHANNELS and message.content:
             embed = discord.Embed(title=message.channel.guild.name)
             embed.add_field(name=message.channel.name, value=self.reformat_message(message))
