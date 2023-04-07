@@ -3,10 +3,10 @@ services:
   relay:
     build: .
     environment:
-      - DISCORD_TOKEN=
-      - SPY_CHANNELS=
-      - WEBHOOK_ID=
-      - WEBHOOK_TOKEN=
+      - DISCORD_TOKEN=discord_token
+      - SPY_CHANNELS=[channelid1, channelid2, ...]
+      - WEBHOOK_ID=webhook_id
+      - WEBHOOK_TOKEN=webhook_secret
     networks:
       - web
 

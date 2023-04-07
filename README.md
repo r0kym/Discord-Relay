@@ -3,7 +3,9 @@ Discord Relay
 
 Basic bot using [discord.py-self](https://github.com/dolfies/discord.py-self) to relay messages in a channel to a dedicated webhook.
 
+Note: more conveniently you can use the [docker-compose](docker-compose.yml) file to setup environment variables. 
 
+Then use `docker-compose up -d --build` to launch
 # Setup
 Build the docker image
 ```shell
@@ -12,6 +14,7 @@ docker build -t relay .
 
 
 # Startup
+
 ```sh
 docker run --rm -d \
   --env "DISCORD_TOKEN=DISCORD_TOKEN" \
