@@ -5,8 +5,7 @@ services:
     environment:
       - DISCORD_TOKEN=discord_token
       - SPY_CHANNELS=[channelid1, channelid2, ...]
-      - WEBHOOK_ID=webhook_id
-      - WEBHOOK_TOKEN=webhook_secret
+      - WEBHOOK_URL=https://discord.com/api/webhooks/WEBHOOK_ID/WEBHOOK_TOKEN
     networks:
       - web
 
