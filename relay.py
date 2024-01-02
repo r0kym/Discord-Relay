@@ -25,12 +25,12 @@ async def on_ready():
 async def on_message(message: discord.Message):
     if message.channel.id in SPY_CHANNELS and message.content:
         embed = discord.Embed(title=message.channel.guild.name)
-        embed.add_field(name=message.channel.name, value=reformat_message(message))
+        embed.add_field(name=f"#{message.channel.name}", value=reformat_message(message))
 
         await send_embed_through_webhook(embed, member_mimic=message.author)
 
         for embed in message.embeds:
-            await send_embed_through_webhook(embed)
+            await send_embed_through_webhook(embed, member_mimic=message.author)
 
 
 async def send_embed_through_webhook(embed: discord.Embed, *, member_mimic: discord.Member = None):
