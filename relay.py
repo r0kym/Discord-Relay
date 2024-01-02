@@ -16,7 +16,7 @@ async def on_ready():
     for channel_id in SPY_CHANNELS:
         print(f" - {client.get_channel(channel_id)}")
 
-    embed = discord.Embed(title="Discord relay started")
+    embed = discord.Embed(title="Discord relay completely started")
     channels = '\n'.join([client.get_channel(channel_id).name for channel_id in SPY_CHANNELS])
     embed.add_field(name="Channels observed:", value=channels)
     await send_embed_through_webhook(embed)
@@ -29,14 +29,8 @@ async def on_message(message: discord.Message):
 
         await send_embed_through_webhook(embed, member_mimic=message.author)
 
-
-        # TODO make is possible to return message embeds as before
-        """ 
-        webhook.send(username=message.author.display_name,
-                     avatar_url=f'https://cdn.discordapp.com/avatars/{message.author.id}/{message.author.avatar}.webp',
-                     embeds=[embed] + message.embeds[:9])
-        """
-
+        for embed in message.embeds:
+            await send_embed_through_webhook(embed)
 
 
 async def send_embed_through_webhook(embed: discord.Embed, *, member_mimic: discord.Member = None):
