@@ -23,7 +23,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message: discord.Message):
-    if message.channel.id in SPY_CHANNELS and message.content:
+    if message.channel.id in SPY_CHANNELS:
         embed = discord.Embed(title=message.channel.guild.name)
         embed.add_field(name=f"#{message.channel.name}", value=reformat_message(message))
 
