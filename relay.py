@@ -12,6 +12,9 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
+
+    await client.change_presence(status=discord.Status.invisible)
+
     print(f"Logged on as {client.user}, tracking: ")
     for channel_id in SPY_CHANNELS:
         print(f" - {client.get_channel(channel_id)}")
